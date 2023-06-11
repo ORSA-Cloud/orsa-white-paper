@@ -1,244 +1,237 @@
-%% arara directives
-% arara: xelatex
-% arara: bibtex
-% arara: xelatex
-% arara: xelatex
+%% 
+%% Copyright 2007-2020 Elsevier Ltd
+%% 
+%% This file is part of the 'Elsarticle Bundle'.
+%% ---------------------------------------------
+%% 
+%% It may be distributed under the conditions of the LaTeX Project Public
+%% License, either version 1.2 of this license or (at your option) any
+%% later version.  The latest version of this license is in
+%%    http://www.latex-project.org/lppl.txt
+%% and version 1.2 or later is part of all distributions of LaTeX
+%% version 1999/12/01 or later.
+%% 
+%% The list of all files belonging to the 'Elsarticle Bundle' is
+%% given in the file `manifest.txt'.
+%% 
+%% Template article for Elsevier's document class `elsarticle'
+%% with harvard style bibliographic references
 
-%\documentclass{article} % One-column default
-\documentclass[twocolumn, switch]{article} % Method A for two-column formatting
+%\documentclass[preprint,12pt,authoryear]{elsarticle}
 
-\usepackage{preprint}
+%% Use the option review to obtain double line spacing
+%% \documentclass[authoryear,preprint,review,12pt]{elsarticle}
 
-%% Math packages
-\usepackage{amsmath, amsthm, amssymb, amsfonts}
+%% Use the options 1p,twocolumn; 3p; 3p,twocolumn; 5p; or 5p,twocolumn
+%% for a journal layout:
+%% \documentclass[final,1p,times,authoryear]{elsarticle}
+%% \documentclass[final,1p,times,twocolumn,authoryear]{elsarticle}
+%% \documentclass[final,3p,times,authoryear]{elsarticle}
+%% \documentclass[final,3p,times,twocolumn,authoryear]{elsarticle}
+%% \documentclass[final,5p,times,authoryear]{elsarticle}
+\documentclass[final,5p,times,twocolumn,authoryear]{elsarticle}
 
-%% Bibliography options
-\usepackage[numbers,square]{natbib}
-\bibliographystyle{unsrtnat}
-%\usepackage{natbib}
-%\bibliographystyle{Geology}
+%% For including figures, graphicx.sty has been loaded in
+%% elsarticle.cls. If you prefer to use the old commands
+%% please give \usepackage{epsfig}
 
-%% General packages
-\usepackage[utf8]{inputenc}	% allow utf-8 input
-\usepackage[T1]{fontenc}	% use 8-bit T1 fonts
-\usepackage{xcolor}		% colors for hyperlinks
-\usepackage[colorlinks = true,
-            linkcolor = purple,
-            urlcolor  = blue,
-            citecolor = cyan,
-            anchorcolor = black]{hyperref}	% Color links to references, figures, etc.
-\usepackage{booktabs} 		% professional-quality tables
-\usepackage{nicefrac}		% compact symbols for 1/2, etc.
-\usepackage{microtype}		% microtypography
-\usepackage{lineno}		% Line numbers
-\usepackage{float}			% Allows for figures within multicol
-%\usepackage{multicol}		% Multiple columns (Method B)
+%% The amssymb package provides various useful mathematical symbols
+\usepackage{amssymb}
+\usepackage{lipsum}
+\usepackage{booktabs}
+%% The amsthm package provides extended theorem environments
+%% \usepackage{amsthm}
 
-\usepackage{lipsum}		%  Filler text
+%% The lineno packages adds line numbers. Start line numbering with
+%% \begin{linenumbers}, end it with \end{linenumbers}. Or switch it on
+%% for the whole article with \linenumbers.
+%% \usepackage{lineno}
 
- %% Special figure caption options
-\usepackage{newfloat}
-\DeclareFloatingEnvironment[name={Supplementary Figure}]{suppfigure}
-\usepackage{sidecap}
-\sidecaptionvpos{figure}{c}
+%% You might want to define your own abbreviated commands for common used terms, e.g.:
+\newcommand{\kms}{km\,s$^{-1}$}
+\newcommand{\msun}{$M_\odot}
 
-% Section title spacing  options
-\usepackage{titlesec}
-\titlespacing\section{0pt}{12pt plus 3pt minus 3pt}{1pt plus 1pt minus 1pt}
-\titlespacing\subsection{0pt}{10pt plus 3pt minus 3pt}{1pt plus 1pt minus 1pt}
-\titlespacing\subsubsection{0pt}{8pt plus 3pt minus 3pt}{1pt plus 1pt minus 1pt}
+\journal{New Astronomy}
 
-% ORCiD insertion
-\usepackage{tikz,xcolor,hyperref}
 
-\definecolor{lime}{HTML}{A6CE39}
-\DeclareRobustCommand{\orcidicon}{
-	\begin{tikzpicture}
-	\draw[lime, fill=lime] (0,0) 
-	circle [radius=0.16] 
-	node[white] {{\fontfamily{qag}\selectfont \tiny ID}};
-	\draw[white, fill=white] (-0.0625,0.095) 
-	circle [radius=0.007];
-	\end{tikzpicture}
-	\hspace{-2mm}
-}
-\foreach \x in {A, ..., Z}{\expandafter\xdef\csname orcid\x\endcsname{\noexpand\href{https://orcid.org/\csname orcidauthor\x\endcsname}
-			{\noexpand\orcidicon}}
-}
-% Define the ORCID iD command for each author separately. Here done for two authors.
-\newcommand{\orcidauthorA}{0000-0000-0000-0001}
-\newcommand{\orcidauthorB}{0000-0000-0000-0002}
-\newcommand{\orcidauthorC}{0000-0000-0000-0003}
-\newcommand{\orcidauthorD}{0000-0000-0000-0004}
-
-%%%%%%%%%%%%%%%%   Title   %%%%%%%%%%%%%%%%
-\title{A preprint template for LaTeX users}
-
-% Add watermark with submission status
-\usepackage{xwatermark}
-% Left watermark
-\newwatermark[firstpage,color=gray!60,angle=90,scale=0.32, xpos=-4.05in,ypos=0]{\href{https://doi.org/}{\color{gray}{Publication doi}}}
-% Right watermark
-\newwatermark[firstpage,color=gray!60,angle=90,scale=0.32, xpos=3.9in,ypos=0]{\href{https://doi.org/}{\color{gray}{Preprint doi}}}
-% Bottom watermark
-\newwatermark[firstpage,color=gray!90,angle=0,scale=0.28, xpos=0in,ypos=-5in]{*correspondence: \texttt{email@institution.edu}}
-
-%%%%%%%%%%%%%%%  Author list  %%%%%%%%%%%%%%%
-\usepackage{authblk}
-\renewcommand*{\Authfont}{\bfseries}
-\author[1\thanks{\tt{asmith@college.edu}}]{Alice Smith\orcidA{}}
-\author[2]{Bob Jones\orcidB{}}
-
-\affil[1]{Department of Mathematics, University X}
-\affil[2]{Department of Biology, University Y}
-
-% Option 2 for author list
-%\author{
-%  David S.~Hippocampus\thanks{Use footnote for providing further
-%    information about author (webpage, alternative
-%    address)---\emph{not} for acknowledging funding agencies.} \\
-%  Department of Computer Science\\
-%  Cranberry-Lemon University\\
-%  Pittsburgh, PA 15213 \\
-%  \texttt{hippo@cs.cranberry-lemon.edu} \\
-%  %% examples of more authors
-%   \And
-% Elias D.~Striatum \\
-%  Department of Electrical Engineering\\
-%  Mount-Sheikh University\\
-%  Santa Narimana, Levand \\
-%  \texttt{stariate@ee.mount-sheikh.edu} \\
-%  \AND
-%  Coauthor \\
-%  Affiliation \\
-%  Address \\
-%  \texttt{email} \\
-%  % etc.
-%}
-
-%%%%%%%%%%%%%%    Front matter    %%%%%%%%%%%%%%
 \begin{document}
 
-\twocolumn[ % Method A for two-column formatting
-  \begin{@twocolumnfalse} % Method A for two-column formatting
-  
-\maketitle
+\begin{frontmatter}
 
-\begin{abstract}
-Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Ut purus elit, vestibulum ut, placerat ac, adipiscing vitae, felis. Curabitur dictum gravida mauris. Nam arcu libero, nonummy eget, consectetuer id, vulputate a, magna. Donec vehicula augue eu neque. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Mauris ut leo. Cras viverra metus rhoncus sem. Nulla et lectus vestibulum urna fringilla ultrices. Phasellus eu tellus sit amet tortor gravida placerat. Integer sapien est, iaculis in, pretium quis, viverra ac, nunc. Praesent eget sem vel leo ultrices bibendum. Aenean faucibus. Morbi dolor nulla, malesuada eu, pulvinar at, mollis ac, nulla. Curabitur auctor semper nulla. Donec varius orci eget risus. Duis nibh mi, congue eu, accumsan eleifend, sagittis quis, diam. Duis eget orci sit amet orci dignissim rutrum. Nam dui ligula, fringilla a, euismod sodales, sollicitudin vel, wisi. Morbi auctor lorem non justo. 
-\end{abstract}
-%\keywords{First keyword \and Second keyword \and More} % (optional)
-\vspace{0.35cm}
+	%% Title, authors and addresses
 
-  \end{@twocolumnfalse} % Method A for two-column formatting
-] % Method A for two-column formatting
+	%% use the tnoteref command within \title for footnotes;
+	%% use the tnotetext command for theassociated footnote;
+	%% use the fnref command within \author or \affiliation for footnotes;
+	%% use the fntext command for theassociated footnote;
+	%% use the corref command within \author for corresponding author footnotes;
+	%% use the cortext command for theassociated footnote;
+	%% use the ead command for the email address,
+	%% and the form \ead[url] for the home page:
+	%% \title{Title\tnoteref{label1}}
+	%% \tnotetext[label1]{}
+	%% \author{Name\corref{cor1}\fnref{label2}}
+	%% \ead{email address}
+	%% \ead[url]{home page}
+	%% \fntext[label2]{}
+	%% \cortext[cor1]{}
+	%% \affiliation{organization={},
+	%%            addressline={}, 
+	%%            city={},
+	%%            postcode={}, 
+	%%            state={},
+	%%            country={}}
+	%% \fntext[label3]{}
 
-%\begin{multicols}{2} % Method B for two-column formatting (doesn't play well with line numbers), comment out if using method A
+	\title{Title of paper}
+
+	%% use optional labels to link authors explicitly to addresses:
+	%% \author[label1,label2]{}
+	%% \affiliation[label1]{organization={},
+	%%             addressline={},
+	%%             city={},
+	%%             postcode={},
+	%%             state={},
+	%%             country={}}
+	%%
+	%% \affiliation[label2]{organization={},
+	%%             addressline={},
+	%%             city={},
+	%%             postcode={},
+	%%             state={},
+	%%             country={}}
+
+	\author[first]{Author name}
+	\affiliation[first]{organization={University of the Moon},%Department and Organization
+		addressline={},
+		city={Earth},
+		postcode={},
+		state={},
+		country={}}
+
+	\begin{abstract}
+		%% Text of abstract
+		Example abstract for the New Astronomy Journal. Here you provide a brief summary of the research and the results.
+	\end{abstract}
+
+	%%Graphical abstract
+	%\begin{graphicalabstract}
+	%\includegraphics{grabs}
+	%\end{graphicalabstract}
+
+	%%Research highlights
+	%\begin{highlights}
+	%\item Research highlight 1
+	%\item Research highlight 2
+	%\end{highlights}
+
+	\begin{keyword}
+		%% keywords here, in the form: keyword \sep keyword, up to a maximum of 6 keywords
+		keyword 1 \sep{} keyword 2 \sep{} keyword 3 \sep{} keyword 4
+
+		%% PACS codes here, in the form: \PACS code \sep code
+
+		%% MSC codes here, in the form: \MSC code \sep code
+		%% or \MSC[2008] code \sep code (2000 is the default)
+
+	\end{keyword}
 
 
-%%%%%%%%%%%%%%%  Main text   %%%%%%%%%%%%%%%
-% \linenumbers
+\end{frontmatter}
 
-\section{Introduction}
-\lipsum[2]
-\lipsum[3]
+%\tableofcontents
 
+%% \linenumbers
 
-\section{Headings: first level}
-\label{sec:headings}
+%% main text
 
-\lipsum[7] See Section \ref{sec:headings}.
+\section{Introduction}\label{introduction}
 
-\subsection{Headings: second level}
-\lipsum[5]
-\begin{equation}
-\xi _{ij}(t)= {\frac {\alpha _{i}(t)a^{w_t}_{ij}\beta _{j}(t+1)b^{v_{t+1}}_{j}(y_{t+1})}{\sum _{i=1}^{N} \sum _{j=1}^{N} \alpha _{i}(t)a^{w_t}_{ij}\beta _{j}(t+1)b^{v_{t+1}}_{j}(y_{t+1})}}
-\end{equation}
+Here is where you provide an introduction to work and some background. For example building on previous work of image enhancement in optical astronomy \citep{vojtekova2021learning},~\cite{sweere2022deep} developed a method to improve the resolution of X-ray images from XMM-Newton to provide similar spatial resolution to Chandra.
 
-\subsubsection{Headings: third level}
-\lipsum[6]
+\section{Title 2}
+%%\label{}
+\lipsum[1]
 
-\paragraph{Paragraph}
-\lipsum[7]
+\subsection{Subsection title}
 
-\section{Examples of citations, figures, tables, references}
-\label{sec:others}
-\lipsum[8] \cite{kour2014real,kour2014fast} and see \cite{hadash2018estimate}.
-
-The documentation for \verb+natbib+ may be found at
-\begin{center}
-  \url{http://mirrors.ctan.org/macros/latex/contrib/natbib/natnotes.pdf}
-\end{center}
-Of note is the command \verb+\citet+, which produces citations
-appropriate for use in inline text.  For example,
-\begin{verbatim}
-   \citet{hasselmo} investigated\dots
-\end{verbatim}
-produces
-\begin{quote}
-  Hasselmo, et al.\ (1995) investigated\dots
-\end{quote}
-
-\begin{center}
-  \url{https://www.ctan.org/pkg/booktabs}
-\end{center}
-
-
-\subsection{Figures}
-\lipsum[10] 
-See Figure \ref{fig:fig1}. Here is how you add footnotes. %\footnote{Sample of the first footnote.}
-\lipsum[11] 
-
-\begin{figure}[H]
-  \centering
-  \fbox{\rule[-.5cm]{4cm}{4cm} \rule[-.5cm]{4cm}{0cm}}
-  \caption{Sample figure caption.}
-  \label{fig:fig1}
+\begin{figure}
+	\centering
+	\includegraphics[width=0.4\textwidth, angle=-90]{images/NEASPA_cover_image.pdf}
+	\caption{New Astronomy Journal cover.}\label{fig_mom0}
 \end{figure}
 
-\subsection{Tables}
-\lipsum[12]
-See awesome Table \ref{tab:table}.
+A random equation, the Toomre stability criterion:
 
-\begin{table}[H]
- \caption{Sample table title}
-  \centering
-  \begin{tabular}{lll}
-    \toprule
-    \multicolumn{2}{c}{Part}                   \\
-    \cmidrule(r){1-2}
-    Name     & Description     & Size ($\mu$m) \\
-    \midrule
-    Dendrite & Input terminal  & $\sim$100     \\
-    Axon     & Output terminal & $\sim$10      \\
-    Soma     & Cell body       & up to $10^6$  \\
-    \bottomrule
-  \end{tabular}
-  \label{tab:table}
+\begin{equation}
+	Q = \frac{\sigma_v \times \kappa}{\pi \times G \times \Sigma}
+\end{equation}
+
+\section{Title 3}
+%%\label{}
+\lipsum[2]
+
+\subsection{Subsection title}
+\lipsum[3]
+
+\begin{table}
+	\begin{tabular}{l c c c}
+		\midrule
+		Source   & RA (J2000)    & DEC (J2000)  & $V_{\rm sys}$ \\
+		         & [h,m,s]       & [o,','']     & \kms          \\
+		\midrule
+		NGC\,253 & 00:47:33.120  & -25:17:17.59 & $235 \pm 1$   \\
+		M\,82    & 09:55:52.725, & +69:40:45.78 & $269 \pm 2$   \\
+		\midrule
+	\end{tabular}
+	\caption{Random table with galaxies coordinates and velocities, Number the tables consecutively in
+		accordance with their appearance in the text and place any table notes below the table body. Please avoid using vertical rules and shading in table cells.
+	}\label{Table1}
 \end{table}
 
-\subsection{Lists}
-\begin{itemize}
-\item Lorem ipsum dolor sit amet
-\item consectetur adipiscing elit. 
-\item Aliquam dignissim blandit est, in dictum tortor gravida eget. In ac rutrum magna.
-\end{itemize}
+\section{Discussion}
+%%\label{}
+\lipsum[4]
 
-%%%%%%%%%%%% Supplementary Methods %%%%%%%%%%%%
-%\footnotesize
-%\section*{Methods}
+\section{Summary and conclusions}
+%%\label{}
+\lipsum[1-4]
 
-%%%%%%%%%%%%% Acknowledgements %%%%%%%%%%%%%
-%\footnotesize
-%\section*{Acknowledgements}
 
-%%%%%%%%%%%%%%   Bibliography   %%%%%%%%%%%%%%
-\normalsize
+\section*{Acknowledgements}
+Thanks to \ldots
+
+%% The Appendices part is started with the command \appendix;
+%% appendix sections are then done as normal sections
+\appendix
+
+\section{Appendix title 1}
+%% \label{}
+
+\section{Appendix title 2}
+%% \label{}
+
+%% If you have bibdatabase file and want bibtex to generate the
+%% bibitems, please use
+%%
+\bibliographystyle{elsarticle-harv}
 \bibliography{references}
 
-%%%%%%%%%%%%  Supplementary Figures  %%%%%%%%%%%%
-%\clearpage
+%% else use the following coding to input the bibitems directly in the
+%% TeX file.
 
-%%%%%%%%%%%%%%%%   End   %%%%%%%%%%%%%%%%
-%\end{multicols}  % Method B for two-column formatting (doesn't play well with line numbers), comment out if using method A
+%%\begin{thebibliography}{00}
+
+%% \bibitem[Author(year)]{label}
+%% For example:
+
+%% \bibitem[Aladro et al.(2015)]{Aladro15} Aladro, R., Martín, S., Riquelme, D., et al. 2015, \aas, 579, A101
+
+
+%%\end{thebibliography}
+
 \end{document}
+
+\endinput
+%%
+%% End of file `elsarticle-template-harv.tex'.
